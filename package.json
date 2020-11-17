@@ -15,6 +15,7 @@
   "homepage": "https://github.com/Neatoro/user-service#readme",
   "scripts": {
     "start": "node .",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "build": "tsc"
   },
   "dependencies": {
@@ -22,9 +23,12 @@
     "@nestjs/config": "0.5.0",
     "@nestjs/core": "7.5.1",
     "@nestjs/platform-express": "7.5.1",
+    "@nestjs/typeorm": "7.1.4",
     "helmet": "4.2.0",
+    "mysql": "2.18.1",
     "reflect-metadata": "0.1.13",
-    "rxjs": "6.6.3"
+    "rxjs": "6.6.3",
+    "typeorm": "0.2.29"
   },
   "devDependencies": {
     "@types/node": "14.14.7",
