@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { UserController } from 'src/user/user.controller';
 import { CreateUserDTO } from 'src/user/user.interface';
 import { User } from 'src/user/user.model';
@@ -27,6 +28,23 @@ describe('UserController', () => {
       const serviceSpy = jest.spyOn(service, 'create');
       await controller.register(stubCreateUser);
       expect(serviceSpy).toHaveBeenCalledWith(stubCreateUser);
+    });
+
+    it('should fail when user already exists', async () => {
+      const stubCreateUser: CreateUserDTO = {
+        login: 'test@test.com',
+        password: 'test'
+      };
+
+      jest.spyOn(service, 'create').mockImplementation(() => {
+        throw { code: 'ER_DUP_ENTRY' };
+      });
+
+      try {
+        await controller.register(stubCreateUser);
+      } catch (e) {
+        expect(e.getStatus()).toBe(400);
+      }
     });
 
   });
