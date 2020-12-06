@@ -34,7 +34,7 @@
     "start": "node .",
     "test:unit": "jest",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "build": "tsc"
+    "build": "tsc --project tsconfig.production.json"
   },
   "dependencies": {
     "@nestjs/common": "7.5.5",
