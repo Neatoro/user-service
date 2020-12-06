@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { generateSalt, sha512 } from '../utils';
+import { generateSalt, hashPassword } from '../utils';
 import { CreateUserDTO } from './user.interface';
 import { User } from './user.model';
 
@@ -34,7 +34,7 @@ export class UserService {
 
   async create(dto: CreateUserDTO) {
     const salt: string = generateSalt();
-    dto.password = sha512(sha512(dto.password) + salt);
+    dto.password = hashPassword(dto.password, salt);
 
     await this.userRepository.save({ ...dto, salt });
   }

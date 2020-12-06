@@ -1,9 +1,8 @@
-import { createHash, randomBytes } from 'crypto';
+import bcrypt from 'bcrypt';
+import { randomBytes } from 'crypto';
 
-export function sha512(text: string): string {
-  const hash = createHash('sha512');
-  const data = hash.update(text, 'utf8');
-  return data.digest('hex');
+export function hashPassword(password, salt) {
+  return bcrypt.hashSync(password, salt);
 }
 
 export function generateSalt(): string {

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { User } from '../user/user.model';
 import { JwtService } from '@nestjs/jwt';
-import { sha512 } from '../utils';
+import { hashPassword } from '../utils';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
       return null;
     }
 
-    const saltedPassword = sha512(sha512(password) + user.salt);
+    const saltedPassword = hashPassword(password, user.salt);
 
     if (user.password === saltedPassword) {
       const { password, ...result } = user;

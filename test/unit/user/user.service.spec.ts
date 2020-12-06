@@ -78,7 +78,7 @@ describe('UserService', () => {
   describe('create', () => {
 
     it('should create a user with salt', async () => {
-      jest.spyOn(utils, 'sha512').mockImplementation((text) => `sha512(${text})`);
+      jest.spyOn(utils, 'hashPassword').mockImplementation((password, salt) => `hash(${password}${salt})`);
       jest.spyOn(utils, 'generateSalt').mockReturnValue('some-salt');
 
       const spy = jest.spyOn(userRepository, 'save').mockReturnValue(Promise.resolve(undefined));
@@ -90,7 +90,7 @@ describe('UserService', () => {
 
       expect(spy).toHaveBeenCalledWith({
         login: 'test@test.com',
-        password: 'sha512(sha512(test)some-salt)',
+        password: 'hash(testsome-salt)',
         salt: 'some-salt'
       });
     });
