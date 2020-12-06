@@ -1,4 +1,3 @@
-import { BadRequestException } from '@nestjs/common';
 import { UserController } from 'src/user/user.controller';
 import { CreateUserDTO } from 'src/user/user.interface';
 import { User } from 'src/user/user.model';
