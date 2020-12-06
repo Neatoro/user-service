@@ -22,4 +22,9 @@ export class AuthController {
     return request.user;
   }
 
+  @Get('/public')
+  getPublicKey() {
+    return process.env.JWT_PUBLIC_KEY;
+  }
+
 };
