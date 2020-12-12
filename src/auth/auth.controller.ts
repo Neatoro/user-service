@@ -16,12 +16,6 @@ export class AuthController {
     return serviceObject;
   }
 
-  @UseGuards(AuthGuard('jwt'))
-  @Get('/profile')
-  async getProfile(@Req() request) {
-    return request.user;
-  }
-
   @Get('/public')
   getPublicKey() {
     return process.env.JWT_PUBLIC_KEY;

@@ -33,10 +33,8 @@ export class UserService {
   }
 
   async create(dto: CreateUserDTO) {
-    const salt: string = generateSalt();
-    dto.password = hashPassword(dto.password, salt);
-
-    await this.userRepository.save({ ...dto, salt });
+    const user: User = this.userRepository.create(dto);
+    return await this.userRepository.save(user);
   }
 
   delete(login: string) {
